@@ -1,8 +1,9 @@
 fastapi
 uvicorn
 joblib
-scikit-learn
 pandas
+scikit-learn
 streamlit
 plotly
 requests
+python-multipart
