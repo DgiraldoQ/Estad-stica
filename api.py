@@ -6,7 +6,7 @@ import os
 import google.generativeai as genai
 
 # 1. Leer la API key (debe estar en Render)
-genai_api_key = os.getenv("GEMINI_API_KEY")
+genai_api_key = os.getenv("GOOGLE_API_KEY")
 
 # 2. Configurar cliente Gemini
 genai.configure(api_key=genai_api_key)
