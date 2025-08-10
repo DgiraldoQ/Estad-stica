@@ -13,13 +13,13 @@ app = FastAPI(title="API Calidad del Aire")
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permitir todos los orígenes
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Clase para los datos de entrada
+# Datos de entrada
 class AirQualityInput(BaseModel):
     CO_AQI: float
     NO2_AQI: float
@@ -30,7 +30,7 @@ class AirQualityInput(BaseModel):
     AQI_TOTAL: float
 
     class Config:
-        allow_population_by_field_name = True  # Permite usar alias o nombres internos
+        allow_population_by_field_name = True
 
 @app.get("/")
 def home():
@@ -38,7 +38,6 @@ def home():
 
 @app.post("/predict")
 def predict(data: AirQualityInput):
-    # Mantener el orden EXACTO usado en el entrenamiento del modelo
     entrada = [[
         data.CO_AQI,
         data.NO2_AQI,
