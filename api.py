@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import joblib
 
 # Cargar modelo
-modelo = joblib.load(r"modelo_calidad_aire.joblib")
+modelo = joblib.load("modelo_calidad_aire.joblib")
 
 # Crear instancia de FastAPI
 app = FastAPI(title="API Calidad del Aire")
