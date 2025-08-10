@@ -25,7 +25,7 @@ class AirQualityInput(BaseModel):
     NO2_AQI: float
     SO2_AQI: float
     O3_AQI: float
-    PM2_5_AQI: float
+    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")
     PM10_AQI: float
     AQI_TOTAL: float
 
