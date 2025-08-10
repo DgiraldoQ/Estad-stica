@@ -21,16 +21,16 @@ app.add_middleware(
 
 # Datos de entrada
 class AirQualityInput(BaseModel):
-    CO_AQI: float
-    NO2_AQI: float
-    SO2_AQI: float
-    O3_AQI: float
-    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")
-    PM10_AQI: float
-    AQI_TOTAL: float
+    CO_AQI: float = Field(..., alias="CO_AQI")
+    NO2_AQI: float = Field(..., alias="NO2_AQI")
+    SO2_AQI: float = Field(..., alias="SO2_AQI")
+    O3_AQI: float = Field(..., alias="O3_AQI")
+    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")  # acepta ambas formas
+    PM10_AQI: float = Field(..., alias="PM10_AQI")
+    AQI_TOTAL: float = Field(..., alias="AQI_TOTAL")
 
     class Config:
-        allow_population_by_field_name = True  # Permite alias
+        allow_population_by_field_name = True  # permite usar PM2_5_AQI o PM2.5_AQI
 
 @app.get("/")
 def home():
