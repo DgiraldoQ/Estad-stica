@@ -1,6 +1,6 @@
 # api.py
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 import joblib
 
@@ -13,7 +13,7 @@ app = FastAPI(title="API Calidad del Aire")
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permitir todos los orígenes (en producción puedes limitarlo)
+    allow_origins=["*"],  # Permitir todos los orígenes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,8 +25,11 @@ class AirQualityInput(BaseModel):
     NO2_AQI: float
     SO2_AQI: float
     O3_AQI: float
-    PM25_AQI: float
+    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")
     PM10_AQI: float
+
+    class Config:
+        allow_population_by_field_name = True  # Permite usar alias o nombres internos
 
 @app.get("/")
 def home():
@@ -39,7 +42,7 @@ def predict(data: AirQualityInput):
         data.NO2_AQI,
         data.SO2_AQI,
         data.O3_AQI,
-        data.PM25_AQI,
+        data.PM2_5_AQI,
         data.PM10_AQI
     ]]
     prediccion = modelo.predict(entrada)[0]
