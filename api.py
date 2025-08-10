@@ -10,7 +10,7 @@ genai_api_key = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=genai_api_key)
 
 # Cargar modelo entrenado
-modelo = joblib.load("predict_decision_tree.joblib")
+modelo = joblib.load("modelo_calidad_aire.joblib")
 
 app = FastAPI(title="API Calidad del Aire AI Autónoma")
 
