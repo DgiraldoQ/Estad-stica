@@ -1,6 +1,7 @@
 # api.py
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 
 # Cargar modelo
@@ -8,6 +9,15 @@ modelo = joblib.load("modelo_calidad_aire.joblib")
 
 # Crear instancia de FastAPI
 app = FastAPI(title="API Calidad del Aire")
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir todos los orígenes (en producción puedes limitarlo)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Clase para los datos de entrada
 class AirQualityInput(BaseModel):
