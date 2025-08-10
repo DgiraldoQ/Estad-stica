@@ -25,8 +25,9 @@ class AirQualityInput(BaseModel):
     NO2_AQI: float
     SO2_AQI: float
     O3_AQI: float
-    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")
+    PM2_5_AQI: float = Field(..., alias="PM2.5_AQI")  # alias para nombres con punto
     PM10_AQI: float
+    AQI_TOTAL: float
 
     class Config:
         allow_population_by_field_name = True  # Permite usar alias o nombres internos
@@ -37,13 +38,15 @@ def home():
 
 @app.post("/predict")
 def predict(data: AirQualityInput):
+    # Mantener el orden EXACTO usado en el entrenamiento del modelo
     entrada = [[
         data.CO_AQI,
         data.NO2_AQI,
         data.SO2_AQI,
         data.O3_AQI,
         data.PM2_5_AQI,
-        data.PM10_AQI
+        data.PM10_AQI,
+        data.AQI_TOTAL
     ]]
     prediccion = modelo.predict(entrada)[0]
     return {"clasificacion": int(prediccion)}
