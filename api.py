@@ -79,7 +79,7 @@ def generar_explicacion_llm(entrada, aqi_total, prediccion):
         f"El modelo predice la siguiente clasificación de calidad del aire: {prediccion}.\n"
         "Explica al usuario el significado de esta clasificación y da 2 recomendaciones de salud pública."
     )
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     response = model.generate_content(prompt)
     return response.text.strip()
 
